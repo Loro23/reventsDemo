@@ -16,11 +16,13 @@ state= {
     console.log(this.state)
   }
 
-  handlChange= (evt) =>{
+  handlChange= ({target:{name, value}}) =>{
     this.setState({
-      [evt.target.name]: evt.target.value
+      [name]: value
     })
   }
+
+  // I believe the error is somewhere here
 
 
     render() {
