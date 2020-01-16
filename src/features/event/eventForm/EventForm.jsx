@@ -10,10 +10,23 @@ state= {
   venue:"",
   hostedBy:"",
 }
+  componentDidMount(){
+    if(this.props.selectedEvent !== null ){
+      this.setState({
+        ...this.props.selectedEvent
+      })
+    }
+  }
 
-  handleFormsubmit = (evt) => {
+
+  handleFormSubmit = (evt) => {
     evt.preventDefault()
-    console.log(this.state)
+    if(this.state.id){
+      this.props.updatedEvent(this.state)
+    }else {
+      this.props.createEvent(this.state)
+    }
+    
   }
 
   handlChange= ({target:{name, value}}) =>{
@@ -22,7 +35,6 @@ state= {
     })
   }
 
-  // I believe the error is somewhere here
 
 
     render() {
@@ -30,7 +42,7 @@ state= {
       const {title, date, city, venue, hostedBy} = this.state;
         return (
                   <Segment>
-                    <Form onSubmit={this.handleFormsubmit} autoComplete="off">
+                    <Form onSubmit={this.handleFormSubmit} autoComplete="off">
                       <Form.Field>
                         <label>Event Title</label>
                         <input 
